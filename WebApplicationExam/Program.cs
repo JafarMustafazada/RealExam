@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using WebApplicationExam.Contexts;
 using WebApplicationExam.Extensions;
 using WebApplicationExam.Models;
+using WebApplicationExam.Services.Implements;
+using WebApplicationExam.Services.Interfaces;
 
 namespace WebApplicationExam;
 
@@ -15,6 +17,8 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddScoped<ILayoutService, LayoutService>();
 
         builder.Services.AddDbContext<Carvila01DbContext>(options =>
         {

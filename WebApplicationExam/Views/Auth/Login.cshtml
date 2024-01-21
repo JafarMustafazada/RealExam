@@ -1,9 +1,7 @@
 ﻿@model LoginVM
 @{
+    Layout = "_LayoutAuth";
     ViewData["Title"] = "Login";
-}
-@section Style {
-    <link rel="stylesheet" href="~/style.css">
 }
 <div class="wrapper">
     <h2>Login</h2>
@@ -20,6 +18,7 @@
             <input asp-for="Remember" type="checkbox">
             <h3>Remember me</h3>
         </div>
+        <div asp-validation-summary="ModelOnly"></div>
         <div class="input-box button">
             <input type="Submit" value="Login Now">
         </div>

@@ -1,0 +1,31 @@
+﻿@model SettingEditAVM
+@{
+    ViewData["Title"] = "Edit Comment";
+}
+<div class="wrapper">
+    <h2>Edit</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="input-box">
+            <input asp-for="CompanyName" placeholder="Enter company name">
+            <span asp-validation-for="CompanyName"></span>
+        </div>
+        <div class="input-box">
+            <input asp-for="Email" placeholder="Enter email">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="input-box">
+            <input asp-for="PhoneNumber" placeholder="Enter phone number">
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+        <div class="input-box">
+            <img src="@Model.BackImagePath" width="50">
+            <input asp-for="BackImageFile">
+            <span asp-validation-for="BackImageFile"></span>
+        </div>
+        <br>
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="input-box button">
+            <input type="Submit" value="Edit Now">
+        </div>
+    </form>
+</div>

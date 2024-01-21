@@ -18,7 +18,8 @@ namespace WebApplicationExam.Controllers
 
         public IActionResult Index()
         {
-            return View(this._context.Comments.Where(c => c.IsActive).Take(4).Include(c => c.AppUser).
+            return View(this._context.Comments.Where(c => c.IsActive).Take(4).
+                Include(c => c.AppUser).
                 Select(c => new CommentVM(c)));
         }
 

@@ -1,6 +1,6 @@
-﻿@model IEnumerable<CommentAVM>
+﻿@model SettingAVM
 @{
-    ViewData["Title"] = "Comments";
+    ViewData["Title"] = "Setting";
 }
 @section Style {
     <!-- Custom styles for this page -->
@@ -16,7 +16,7 @@
 }
 
 <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<a asp-action="Create">Create</a>
+<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -26,40 +26,32 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Toggle</th>
-                        <th>Edit</th>
-                        <th>Username</th>
-                        <th>FromCity</th>
+                        <th>Company name</th>
+                        <th>Phone number</th>
                         <th>Image</th>
-                        <th>Content</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>Id</th>
-                        <th>Toggle</th>
-                        <th>Edit</th>
-                        <th>Username</th>
-                        <th>FromCity</th>
+                        <th>Company name</th>
+                        <th>Phone number</th>
                         <th>Image</th>
-                        <th>Content</th>
+                        <th>Email</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @if (Model != null)
                     {
-                        foreach (var item in Model)
-                        {
-                            <tr class="@(item.IsActive ? "" : "alert-danger")">
-                                <td>@item.Id</td>
-                                <td><a asp-action="Toggle" asp-route-id="@item.Id">Toggle</a></td>
-                                <th><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></th>
-                                <td>@item.Username</td>
-                                <td>@item.FromCity</td>
-                                <td><img width="50" src="~/@item.ImagePath"></td>
-                                <td>@item.Content</td>
-                            </tr>
-                        }
+                        <tr>
+                            <td>@Model.Id</td>
+                            <td>@Model.CompanyName</td>
+                            <td>@Model.PhoneNumber</td>
+                            <td><img width="50" src="~/@Model.BackImagePath"></td>
+                            <td>@Model.Email</td>
+                        </tr>
+
                     }
                 </tbody>
             </table>

@@ -1,0 +1,29 @@
+﻿@model EditProfileVM
+@{
+    Layout = "_LayoutAuth";
+    ViewData["Title"] = "Profile";
+}
+
+<div class="wrapper">
+    <h2>Edit</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="input-box">
+            <input asp-for="Fullname" placeholder="Enter unique username" >
+            <span asp-validation-for="Fullname"></span>
+        </div>
+        <div class="input-box">
+            <input asp-for="FromCity" placeholder="Create password" >
+            <span asp-validation-for="FromCity"></span>
+        </div>
+        <div class="input-box">
+            <img width="50" src="~/@Model.ImagePath">
+            <input asp-for="ImageFile" >
+            <span asp-validation-for="ImageFile"></span>
+        </div>
+        <br>
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="input-box button">
+            <input type="Submit" value="Edit Now">
+        </div>
+    </form>
+</div>

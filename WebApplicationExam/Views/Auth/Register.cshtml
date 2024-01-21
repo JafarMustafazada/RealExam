@@ -1,9 +1,7 @@
 ﻿@model RegisterVM
 @{
+    Layout = "_LayoutAuth";
     ViewData["Title"] = "Register";
-}
-@section Style {
-    <link rel="stylesheet" href="~/style.css">
 }
 <div class="wrapper">
     <h2>Registration</h2>
@@ -32,6 +30,7 @@
             <input type="checkbox">
             <h3>I accept all terms & condition</h3>
         </div> *@
+        <div asp-validation-summary="ModelOnly"></div>
         <div class="input-box button">
             <input type="Submit" value="Register Now">
         </div>

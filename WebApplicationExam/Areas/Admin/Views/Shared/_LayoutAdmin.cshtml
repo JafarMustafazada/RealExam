@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Admin @ViewData["Title"]</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/admin/css/sb-admin-2.min.css" rel="stylesheet">
-
+    @await RenderSectionAsync("Style", required: false)
 </head>
 
 <body id="page-top">
@@ -52,6 +52,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" asp-action="Index" asp-controller="Comment">Comments</a>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Setting">Settings</a>
                     </div>
                 </div>
             </li>
@@ -216,6 +217,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/admin/js/sb-admin-2.min.js"></script>
+    @await RenderSectionAsync("Script", required: false)
 
 </body>
 

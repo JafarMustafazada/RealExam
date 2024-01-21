@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApplicationExam.Contexts;
+using WebApplicationExam.Extensions;
 using WebApplicationExam.Models;
 using WebApplicationExam.Models.Static;
 using WebApplicationExam.ViewModel.AuthVMs;
@@ -10,15 +13,17 @@ namespace WebApplicationExam.Controllers;
 
 public class AuthController : Controller
 {
+    Carvila01DbContext _context {  get; }
     UserManager<AppUser> _userManager {  get; }
     RoleManager<IdentityRole> _roleManager { get; }
     SignInManager<AppUser> _signInManager { get; }
 
-    public AuthController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager)
+    public AuthController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, Carvila01DbContext context)
     {
         this._userManager = userManager;
         this._roleManager = roleManager;
         this._signInManager = signInManager;
+        this._context = context;
     }
 
 
@@ -93,6 +98,35 @@ public class AuthController : Controller
     {
         await this._signInManager.SignOutAsync();
         return RedirectToAction(nameof(Login));
+    }
+
+    [Authorize]
+    // GET: AuthController/Profile
+    public async Task<ActionResult> Profile()
+    {
+        AppUser user = await this._context.AppUsers.FirstAsync(u => u.UserName == User.Identity.Name);
+        return View(new EditProfileVM(user));
+    }
+    // POST: AuthController/Profile
+    [Authorize]
+    [HttpPost]
+    public async Task<ActionResult> Profile(EditProfileVM vm)
+    {
+        if (vm.ImageFile != null && !vm.ImageFile.IsContentType()) 
+        {
+            ModelState.AddModelError("", "No image provided");
+        }
+        if(!ModelState.IsValid)
+        {
+            return View(vm);
+        }
+
+        AppUser user = await this._context.AppUsers.FirstAsync(u => u.UserName == User.Identity.Name);
+        await vm.UpdateEntityAsync(user);
+        this._context.AppUsers.Update(user);
+        await this._context.SaveChangesAsync();
+
+        return RedirectToAction("Index", "Home");
     }
 
     // GET: AuthController/UpdateRoles
