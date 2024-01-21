@@ -1,6 +1,8 @@
 ﻿@using WebApplicationExam.Services.Interfaces
+@inject ILayoutService layoutService
 @{
-    // var settings;
+    var settings = layoutService.GetSettingsAsync().Result;
+    // lenet olsun frontculara hansi ki sekili css-e yazir
 }
 
 <!doctype html>
@@ -88,7 +90,7 @@
                                     data-target="#navbar-menu">
                                 <i class="fa fa-bars"></i>
                             </button>
-                            <a class="navbar-brand" href="index.html">carvilla<span></span></a>
+                            <a class="navbar-brand" asp-action="Index" asp-controller="Home">@settings.CompanyName<span></span></a>
 
                         </div><!--/.navbar-header-->
                         <!-- End Header Navigation -->
@@ -350,15 +352,15 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="single-footer-widget">
                             <div class="footer-logo">
-                                <a href="index.html">carvilla</a>
+                                <a asp-action="Index" asp-controller="Home">@settings.CompanyName</a>
                             </div>
                             <p>
                                 Ased do eiusm tempor incidi ut labore et dolore magnaian aliqua. Ut enim ad minim
                                 veniam.
                             </p>
                             <div class="footer-contact">
-                                <p>info@themesine.com</p>
-                                <p>+1 (885) 2563154554</p>
+                                <p>@settings.Email</p>
+                                <p>@settings.PhoneNumber</p>
                             </div>
                         </div>
                     </div>
